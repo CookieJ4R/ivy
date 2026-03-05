@@ -1,0 +1,9 @@
+services:
+  ivy:
+    build: .
+    container_name: "ivy"
+    ports:
+      - "8123:3000"
+    volumes:
+      - ./docker/db:/app/db
+      - ./docker/data:/app/data

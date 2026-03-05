@@ -1,0 +1,13 @@
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  return (
+    <div className="w-full h-full flex justify-center items-center">
+      <img src="/wip.png" width={800} />
+    </div>
+  );
+}
