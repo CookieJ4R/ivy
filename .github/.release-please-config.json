@@ -1,12 +1,14 @@
 {
   "packages": {
-    "frontend": {
+    ".": {
       "release-type": "node",
-      "changelog-path": "../CHANGELOG.md",
+      "path": "frontend",
+      "changelog-path": "CHANGELOG.md",
       "extra-files": [
         {
-          "type": "generic",
-          "path": "../backend/pyproject.toml"
+          "type": "toml",
+          "path": "backend/pyproject.toml",
+          "jsonpath": "$.project.version"
         }
       ]
     }
