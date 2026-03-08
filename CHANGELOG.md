@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/IchBinderKevin/ivy/compare/v0.1.1...v0.1.2) (2026-03-08)
+
+
+### Bug Fixes
+
+* actually added the docker workflow fix this time ([37741e6](https://github.com/IchBinderKevin/ivy/commit/37741e615433555e9affac1f64afbdad46f90122))
+
 ## [0.1.1](https://github.com/IchBinderKevin/ivy/compare/v0.1.0...v0.1.1) (2026-03-08)
 
 
