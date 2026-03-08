@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/IchBinderKevin/ivy/compare/v0.1.6...v0.1.7) (2026-03-08)
+
+
+### Bug Fixes
+
+* fixed gitignore bug that ignored the lib folder in the frontend.... ([890db76](https://github.com/IchBinderKevin/ivy/commit/890db76681460c7818e75e130c529a3cedb5d653))
+
 ## [0.1.6](https://github.com/IchBinderKevin/ivy/compare/v0.1.5...v0.1.6) (2026-03-08)
 
 
