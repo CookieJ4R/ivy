@@ -4,6 +4,7 @@ FROM node:20-alpine AS frontend
 WORKDIR /frontend
 
 COPY frontend/package*.json ./
+ENV NODE_ENV=development
 RUN npm install
 
 COPY frontend/ .
