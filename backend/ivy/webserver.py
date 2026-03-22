@@ -20,6 +20,7 @@ from services.tag_service import TagService
 from fastapi.responses import FileResponse
 
 FRONTEND_DIST = "./dist"
+FALLBACK_VERSION_NAME = "dev"
 
 
 class Webserver:
@@ -41,6 +42,8 @@ class Webserver:
         self.app.include_router(create_locations_router(project_service), prefix="/api/locations")
         self.app.include_router(create_tags_router(tag_service), prefix="/api/tags")
         self.app.include_router(create_items_router(item_service, FileStorageService()), prefix="/api/items")
+        # TODO: probably move to its own router for visual clarity down the line
+        self.app.get("/api/version")(lambda: {"version": os.getenv("APP_VERSION") if os.getenv("APP_VERSION") else FALLBACK_VERSION_NAME})
 
         self.app.mount(
             "/data/files",

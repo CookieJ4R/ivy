@@ -24,10 +24,28 @@ import {
   Settings,
   Tag,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+let versionPromise: Promise<string> | null = null;
+
+export function getVersion(): Promise<string> {
+  if (!versionPromise) {
+    versionPromise = fetch("/api/version")
+      .then((res) => res.json())
+      .then((data) => data.version);
+  }
+
+  return versionPromise;
+}
 
 function IvySidebar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const [version, setVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    getVersion().then(setVersion);
+  }, []);
 
   return (
     <div className="h-full w-20 bg-neutral-100 text-black flex flex-col items-center justify-start gap-3 py-4">
@@ -119,7 +137,12 @@ function IvySidebar() {
         </DropdownMenu>
       </div>
       {/* Sidebar Footer for future elements */}
-      <div className="flex flex-col h-1/5 items-center justify-end font-mono text-sm text-gray-500"></div>
+      <div className="flex flex-col h-1/5 items-center justify-end font-mono text-sm text-gray-500">
+        <span className="text-xs">
+          {/* checks if version is a semantic version to prefix accordingly othervise just shows the versio from the backend*/}
+          {version && /^\d+\.\d+\.\d+/.test(version) ? `v${version}` : version}
+        </span>
+      </div>
     </div>
   );
 }
