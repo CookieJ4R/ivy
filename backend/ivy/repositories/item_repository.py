@@ -26,7 +26,7 @@ class ItemRepository:
         item = await db.execute("INSERT INTO items (name, description, image, location_id, "
                                 "quantity, date_of_purchase, buy_price, bought_from, "
                                 "serial_number, model_number, isbn, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                                (item_model.name, item_model.description, item_model.image, item_model.location.id,
+                                (item_model.name, item_model.description, item_model.image, item_model.location.id if item_model.location is not None else None,
                                  item_model.quantity,
                                  item_model.date_of_purchase, item_model.buy_price, item_model.bought_from,
                                  item_model.serial_number, item_model.model_number, item_model.isbn, item_model.notes))
