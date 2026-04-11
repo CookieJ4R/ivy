@@ -1,4 +1,3 @@
-import asyncio
 import os
 
 from fastapi import FastAPI
@@ -9,7 +8,7 @@ from uvicorn.server import Server
 from api.item_router import create_items_router
 from api.location_router import create_locations_router
 from api.tag_router import create_tags_router
-from common_constants import FILE_STORAGE_PATH
+from .common_constants import FILE_STORAGE_PATH
 
 from fastapi.responses import FileResponse
 

@@ -2,8 +2,8 @@
 Service layer for managing locations.
 """
 from database.db import AsyncSessionLocal
-from models.db_models.location import Location
-from models.location_model import LocationModel
+from model.domain.location import Location
+from model.schema.location_model import LocationResponse, UpdateLocationRequest
 from sqlalchemy.future import select
 from sqlalchemy import delete
 from sqlalchemy.exc import IntegrityError
@@ -32,10 +32,10 @@ async def create_location(location_name: str):
         await session.refresh(location)
         return location.id
 
-async def update_location(location: LocationModel):
+async def update_location(location: UpdateLocationRequest):
     """
     Updates the name for an existing location with the given ID.
-    :param location: The LocationModel instance containing the ID and new name.
+    :param location: The request containing the ID and new name for the location.
     :raises ValueError: If the location ID does not exist or if the new location name is empty.
     """
     if location.name.strip() == "":
@@ -67,11 +67,11 @@ async def delete_location(location_id: int):
             raise ValueError(f"Location with ID '{location_id}' does not exist.")
         await session.commit()
 
-async def list_locations() -> list[LocationModel]:
+async def list_locations() -> list[LocationResponse]:
     """
     Lists all locations.
     :return: A list of LocationModel instances.
     """
     async with AsyncSessionLocal() as session:
         curr = (await session.scalars(select(Location))).all()
-        return [LocationModel.model_validate(l) for l in curr]
+        return [LocationResponse.model_validate(l) for l in curr]

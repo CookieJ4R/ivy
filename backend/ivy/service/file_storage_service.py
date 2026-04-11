@@ -11,8 +11,8 @@ import uuid
 
 from fastapi import UploadFile
 
-from common_constants import FILE_STORAGE_PATH
-from models.attachment_model import AttachmentModel
+from core.common_constants import FILE_STORAGE_PATH
+from model.schema.attachment_model import AttachmentModel
 
 
 def stage_uploads(uploads: list[UploadFile]):
