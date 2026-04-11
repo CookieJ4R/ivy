@@ -1,14 +1,17 @@
 from datetime import datetime
 from sqlalchemy import String, Integer, Float, DateTime, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models.db_models.base import Base
-from models.db_models.item_attachment_mappings import ItemAttachment
-from models.db_models.item_tag import item_tag_mappings
-from models.db_models.location import Location
-from models.db_models.tag import Tag
+from .base import Base
+from .item_attachment_mappings import ItemAttachment
+from .item_tag import item_tag_mappings
+from .location import Location
+from .tag import Tag
 
 
 class Item(Base):
+    """
+    SQLAlchemy model for item entity.
+    """
     __tablename__ = "items"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

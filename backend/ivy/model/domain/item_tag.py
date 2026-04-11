@@ -1,6 +1,9 @@
+"""
+SQLAlchemy Table for item tag mapping
+"""
 from sqlalchemy import Table, Column, ForeignKey
 
-from models.db_models.base import Base
+from .base import Base
 
 item_tag_mappings = Table(
     "item_tag_mappings",

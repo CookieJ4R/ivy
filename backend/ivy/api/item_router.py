@@ -1,9 +1,9 @@
 import json
 
-from models.item_model import ItemModel, ItemResponseModel
+from model.schema.item_model import CreateItemRequest, ListItemResponse
 from fastapi import APIRouter, status, HTTPException, Response, Form, UploadFile, File
 
-from services import file_storage_service, item_service
+from service import file_storage_service, item_service
 
 
 def create_items_router():
@@ -24,7 +24,7 @@ def create_items_router():
         """
         try:
             item = json.loads(item)
-            item = ItemModel.model_validate(item)
+            item = CreateItemRequest.model_validate(item)
             if image is not None: # needed because at this point item.image is always none
                 item.image = file_storage_service.stage_image_upload(image)
             item.attachments = file_storage_service.stage_uploads(attachments)
@@ -48,7 +48,7 @@ def create_items_router():
 
 
     @router.get("/list")
-    async def list_items() -> list[ItemResponseModel]:
+    async def list_items() -> list[ListItemResponse]:
         """
         Lists all items with their associated tags, location, and attachments.
          :return: A list of ItemResponseModel instances.

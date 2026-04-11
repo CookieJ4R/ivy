@@ -1,6 +1,6 @@
 import asyncio
 
-from webserver import Webserver
+from core.webserver import Webserver
 
 async def main():
     webserver = Webserver()

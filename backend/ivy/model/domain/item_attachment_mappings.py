@@ -1,4 +1,4 @@
-from models.db_models.base import Base
+from .base import Base
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
@@ -6,6 +6,9 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 
 class ItemAttachment(Base):
+    """
+    SQLAlchemy model for item attachment entity.
+    """
     __tablename__ = "item_attachment_mappings"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, HTTPException, Response
 
-from models.location_model import LocationModel
-from services import location_service
+from model.schema.location_model import CreateLocationRequest, LocationResponse, UpdateLocationRequest
+from service import location_service
 
 
 def create_locations_router() -> APIRouter:
@@ -11,7 +11,7 @@ def create_locations_router() -> APIRouter:
     router = APIRouter()
     @router.post("/create")
     @router.put("/create")
-    async def create_location(location: LocationModel):
+    async def create_location(location: CreateLocationRequest):
         """
         Creates a new location.
         :param location: The LocationModel model passed from the frontend.
@@ -23,7 +23,7 @@ def create_locations_router() -> APIRouter:
             raise HTTPException(400, str(e))
 
     @router.get("/list")
-    async def list_locations() -> list[LocationModel]:
+    async def list_locations() -> list[LocationResponse]:
         """
         Lists all locations.
         :return: A list of LocationModel instances.
@@ -46,7 +46,7 @@ def create_locations_router() -> APIRouter:
 
     # edit location
     @router.post("/edit")
-    async def edit_location(location: LocationModel):
+    async def edit_location(location: UpdateLocationRequest):
         """
         Edits a location's name by its ID.
         :param location: The LocationModel model passed from the frontend containing the ID and new name.

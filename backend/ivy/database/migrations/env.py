@@ -9,7 +9,7 @@ from alembic import context
 # Make your src folder importable
 sys.path.append(sys.path[0] + "/ivy")
 
-from models.db_models.base import Base  # your declarative base
+from model.domain import Base  # your declarative base
 from database.db import DATABASE_URL      # optional, if you centralize your DB URL
 
 # Alembic config

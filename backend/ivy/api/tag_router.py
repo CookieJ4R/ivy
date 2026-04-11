@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response, status
 
-from models.tag_model import TagModel, TagUsageModel
-from services import tag_service
+from model.schema.tag_model import CreateTagRequest, TagResponse, TagUsageResponse, UpdateTagRequest
+from service import tag_service
 
 
 def create_tags_router() -> APIRouter:
@@ -11,18 +11,18 @@ def create_tags_router() -> APIRouter:
     router = APIRouter()
     @router.post("/create")
     @router.put("/create")
-    async def create_tag(tag: TagModel):
+    async def create_tag(tag: CreateTagRequest):
         """
         Creates a new tag.
         """
         try:
-            await tag_service.create_tag(tag.name, tag.color)
+            await tag_service.create_tag(tag)
             return Response(status_code=status.HTTP_201_CREATED)
         except ValueError as e:
             raise HTTPException(400, str(e))
 
     @router.get("/list")
-    async def list_tags() -> list[TagModel]:
+    async def list_tags() -> list[TagResponse]:
         """
         Lists all tags.
         :return: A list of TagModel instances.
@@ -30,7 +30,7 @@ def create_tags_router() -> APIRouter:
         return await tag_service.list_tags()
 
     @router.get("/usage")
-    async def list_tag_usage() -> TagUsageModel:
+    async def list_tag_usage() -> TagUsageResponse:
         """
         Lists the usage statistics of tags.
         :return: TagUsageModel containing usage statistics.
@@ -38,13 +38,13 @@ def create_tags_router() -> APIRouter:
         return await tag_service.list_tags_usage()
 
     @router.post("/edit")
-    async def edit_tag(tag: TagModel):
+    async def edit_tag(tag: UpdateTagRequest):
         """
         Edits an existing tag.
         :param tag: The TagModel model passed from the frontend.
         """
         try:
-            await tag_service.update_tag(tag.id, tag.name, tag.color)
+            await tag_service.update_tag(tag)
             return Response(status_code=status.HTTP_200_OK)
         except ValueError as e:
             raise HTTPException(400, str(e))
